@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,8 @@ Route::post("login", [UserController::class, "login"]);
 
 
     Route::get("user", [UserController::class, "user"]);
+    Route::middleware(['auth:api'])->group(function () {
+        Route::post('add_task/{id?}',  [TaskController::class, "add_task"]);
+        Route::post('remove_task/{id?}',  [TaskController::class, "remove_task"]);
+    }); 
 
